@@ -58,7 +58,15 @@ def get_farm(auth_token):
 		resp = User.decode_auth_token(auth_token)
 		if not isinstance(resp, str):
 			user_publicid = User.query.filter_by(id=resp).first().public_id
-			return Farm.query.filter_by(user_id=user_publicid).first()
+			farm_info =  Farm.query.filter_by(user_id=user_publicid).all()
+			if farm_info:
+				return farm_info
+			else:
+				response_object = {
+					'status' : 'success',
+					'message' : 'User has no registered farm'
+				}
+				return response_object, 201
 		else:
 			response_object = {
 				'status': 'fail',
@@ -94,7 +102,9 @@ def save_robot(data, auth_token):
     			is_led = data['is_led'],
 				registered_on=datetime.datetime.utcnow()
 			)
+			user.registered_robot_id = new_robot.public_id
 			save_changes(new_robot)
+			save_changes(user)
 			response_object = {
 				'status': 'success',
 				'message': 'Successfully saved.',
@@ -119,7 +129,15 @@ def get_robot(auth_token):
 		resp = User.decode_auth_token(auth_token)
 		if not isinstance(resp, str):
 			user_publicid = User.query.filter_by(id=resp).first().public_id
-			return Robot.query.filter_by(user_id=user_publicid).first()
+			robot_info = Robot.query.filter_by(user_id=user_publicid).first()
+			if robot_info:
+				return robot_info
+			else:
+				response_object = {
+					'status' : 'success',
+					'message' : 'User has no registered robot'
+				}
+				return response_object, 201
 		else:
 			response_object = {
 				'status': 'fail',

@@ -4,6 +4,7 @@ from functools import wraps
 
 from app.main.util.decorator import admin_token_required, token_required
 from ..util.dto import UserDto
+from ..service.auth_service import Auth
 from ..service.user_service import get_all_users, get_a_user, save_farm, get_farm, save_robot, get_robot
 
 
@@ -12,8 +13,6 @@ _farm = UserDto._farm
 _robot = UserDto._robot
 
 api = UserDto.api
-
-
 
 
 @api.route('/')
@@ -41,6 +40,14 @@ class User(Resource):
         else:
             return user
 
+
+@api.route('/info')
+class UserInfo(Resource):
+    """docstring for UserInfo"""
+    @api.doc('get a looged in users info')
+    @token_required
+    def get(self):
+        return Auth.get_logged_in_user(request)
 
 @api.route('/farm')
 class UserFarm(Resource):

@@ -23,7 +23,6 @@ class UserDto:
         'public_id':fields.String(),
         'user_id':fields.String()
         })
-
     _robot = api.model('_robot', {
         'name' : fields.String(),
         'model': fields.String(),
