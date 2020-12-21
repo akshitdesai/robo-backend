@@ -1,41 +1,19 @@
 from flask import request
-from flask_restx import Resource, fields
+from flask_restx import Resource, fields, Model
+from functools import wraps
 
 from app.main.util.decorator import admin_token_required, token_required
 from ..util.dto import UserDto
 from ..service.user_service import get_all_users, get_a_user, save_farm, get_farm, save_robot, get_robot
 
+
+_user = UserDto._user
+_farm = UserDto._farm
+_robot = UserDto._robot
+
 api = UserDto.api
 
-_user = {
-    'username': fields.Raw,
-    'public_id': fields.Raw,
-    'email': fields.Raw,
-    'phone': fields.Raw,
-    'registered_robot_id': fields.Raw,
-}
-_farm = {
-    'name':fields.Raw,
-    'city':fields.Raw,
-    'owner':fields.Raw,
-    'public_id':fields.Raw,
-    'user_id':fields.Raw
-}
-_robot = {
-    'name' : fields.Raw,
-    'model': fields.Raw,
-    'public_id': fields.Raw,
-    'user_id': fields.Raw,
-    'pi_type': fields.Raw,
-    'aurdino_type': fields.Raw,
-    'motor_type': fields.Raw,
-    'motor_driver_type': fields.Raw,
-    'battey_info': fields.Raw,
-    'public_url': fields.Raw,
-    'public_pnumber':fields.Raw,
-    'is_solar': fields.Raw,
-    'is_led': fields.Raw,
-}
+
 
 
 @api.route('/')
