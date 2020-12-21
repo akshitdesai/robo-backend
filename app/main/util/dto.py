@@ -26,19 +26,19 @@ class UserDto:
 
     _robot = api.model('_robot', {
         'name' : fields.String(),
-            'model': fields.String(),
-            'public_id': fields.String(),
-            'user_id': fields.String(),
-            'pi_type': fields.String(),
-            'aurdino_type': fields.String(),
-            'motor_type': fields.String(),
-            'motor_driver_type': fields.String(),
-            'battey_info': fields.String(),
-            'public_url': fields.String(),
-            'public_pnumber':fields.String(),
-            'is_solar': fields.Boolean(),
-            'is_led': fields.Boolean(),
-        })
+        'model': fields.String(),
+        'public_id': fields.String(),
+        'user_id': fields.String(),
+        'pi_type': fields.String(),
+        'aurdino_type': fields.String(),
+        'motor_type': fields.String(),
+        'motor_driver_type': fields.String(),
+        'battey_info': fields.String(),
+        'public_url': fields.String(),
+        'public_pnumber':fields.String(),
+        'is_solar': fields.Boolean(),
+        'is_led': fields.Boolean(),
+    })
 
 
 class AuthDto:
